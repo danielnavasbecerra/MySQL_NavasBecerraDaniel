@@ -96,4 +96,44 @@ INSERT INTO idioma_pais (id_idioma, id_pais, es_oficial) VALUES
 (9, 9, 1);
 
 
+show tables;
+
+
+##### CONSULTAS #####
+-- Consulta general a ciudad
+select * from ciudad;
+
+-- Consulta general a paises
+select * from pais;
+
+-- Consulta de tipo # INNER JOIN # para obtener las ciudades
+-- que están específicamente asignadas a un país
+select pais.nombre as NombrePais, ciudad.nombre as NombreCiudad -- 1. Seleccionar tabla1.columna1 as variable1, tabla2.columna2 as variable2
+From pais inner join ciudad -- 2. Seleccionar de que tabla a que tabla hacer x tipo de relación
+on pais.id = ciudad.id_pais  -- 3. Seleccionar de qué llave primaria o dato principal relacionarse
+
+-- Consulta de tipo # LEFT JOIN # para obtener todas las ciudades
+-- junto con su país, incluso si alguna ciudad no está asignada a esta misma
+select pais.nombre as NombrePais, ciudad.nombre as NombreCiudad -- 1. Seleccionar tabla1.columna1 as variable1, tabla2.columna2 as variable2
+From pais left join ciudad -- 2. Seleccionar de que tabla a que tabla hacer x tipo de relación
+on pais.id = ciudad.id_pais; -- 3. Seleccionar de qué llave primaria o dato principal relacionarse
+
+-- Consulta de tipo # RIGHT JOIN # para obtener todas las ciudades y países
+-- asociadas , donde se incluye también los países que no tienen ciudad
+select pais.nombre as NombrePais, ciudad.nombre as NombreCiudad -- 1. Seleccionar tabla1.columna1 as variable1, tabla2.columna2 as variable2
+From pais right join ciudad -- 2. Seleccionar de que tabla a que tabla hacer x tipo de relación
+on pais.id = ciudad.id_pais  -- 3. Seleccionar de qué llave primaria o dato principal relacionarse
+
+-- Consulta de tipo # FULL OUTER JOIN # para obtener todas las ciudades y países
+-- asociadas , independientemente si tienen correspondencia de una tabla u otra
+select pais.nombre as NombrePais, ciudad.nombre as NombreCiudad -- 1. Seleccionar tabla1.columna1 as variable1, tabla2.columna2 as variable2
+From pais left join ciudad -- 2. Seleccionar de que tabla a que tabla hacer x tipo de relación
+on pais.id = ciudad.id_pais -- 3. Seleccionar de qué llave primaria o dato principal relacionarse
+union
+select pais.nombre as NombrePais, ciudad.nombre as NombreCiudad -- 1. Seleccionar tabla1.columna1 as variable1, tabla2.columna2 as variable2
+From pais right join ciudad -- 2. Seleccionar de que tabla a que tabla hacer x tipo de relación
+on pais.id  = ciudad.id_pais; -- 3. Seleccionar de qué llave primaria o dato principal relacionarse
+
+
+
 -- Desarrollado por Daniel Navas - C.C: 1.***.***.797
